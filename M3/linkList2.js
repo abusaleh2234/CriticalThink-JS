@@ -50,7 +50,23 @@ class LinkList{
             return this.append(value)
         }
         // if insert is middle
-
+        const leadingNode = this._traverseToIndex(index-1)
+        const holdingNode = leadingNode.next;
+        // console.log(leadingNode,"ft");
+        // console.log(holdingNode, "df");
+        
+        
+        
+    }
+    _traverseToIndex(index){
+        let count = 0
+        let currentNode = this.head
+        while(count !== index){
+            currentNode = currentNode.next
+            count++;
+        }
+        return currentNode
+        // console.log(currentNode);
     }
     print(){
         const arr = []
@@ -74,4 +90,7 @@ linkedList.append(3)
 linkedList.prepend(10)
 linkedList.prepend(20)
 linkedList.prepend(30)
+
+linkedList.insert(2,100)
+
 linkedList.print()
