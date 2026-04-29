@@ -22,6 +22,8 @@ class LinkList{
             this.tail = newNode
         }
         this.length ++
+        
+        return this
     }
     prepend(value){
         const nawNode = new Node(value)
@@ -34,6 +36,8 @@ class LinkList{
             this.head = nawNode
         }
         this.length++
+
+        return this
     }
 
     insert(index, value){
@@ -54,9 +58,36 @@ class LinkList{
         const holdingNode = leadingNode.next;
         // console.log(leadingNode,"ft");
         // console.log(holdingNode, "df");
+        const newNode = new Node(value)
+
+        leadingNode.next = newNode;
+        newNode.next = holdingNode;
         
-        
-        
+        this.length ++
+    }
+    remove(index) {
+        if (index < 0 || index > this.length) {
+            console.log("index is out of bound");
+            return undefined
+        }
+        if (index === 0) {
+            const removedItem = this.head.value
+            this.head = this.head.next
+
+            if (this.length === 1) {
+                this.tail = null
+            }
+            this.length--
+            return removedItem
+        }
+        const leadingNode = this._traverseToIndex(index - 1)
+        const nodeToRemove = leadingNode.next 
+        leadingNode.next = nodeToRemove.next  // face err
+
+        if(leadingNode.next === null){
+            this.tail = leadingNode
+        }
+        return nodeToRemove.value
     }
     _traverseToIndex(index){
         let count = 0
@@ -83,14 +114,10 @@ class LinkList{
 
 const linkedList = new LinkList() 
 
-linkedList.append(1)
-linkedList.append(2)
-linkedList.append(3)
+linkedList.append("A")
+linkedList.append("B")
+// linkedList.append("C")
+// linkedList.append("D")
 
-linkedList.prepend(10)
-linkedList.prepend(20)
-linkedList.prepend(30)
-
-linkedList.insert(2,100)
-
+linkedList.remove(0)
 linkedList.print()
